@@ -22,6 +22,8 @@
               <div class="col-sm-6 col-12">
               <form action="" method="post">{% csrf_token %}
                   <input type="text" class="form-control" placeholder="Name" name='fullname'>
+                  <input type="email" class="form-control" placeholder="Email" name='email'>
+                  <textarea name="content" class="form-control" placeholder="your content"></textarea>
                   <button type="submit" class="btn btn btn-default"> Submit</button>
               </form>
             </div>
