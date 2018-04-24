@@ -1,2 +1,3 @@
 root_ecommerce/settings.py
 root_ecommerce/urls.py
+__pycache__.py
