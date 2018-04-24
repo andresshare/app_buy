@@ -18,4 +18,6 @@ def about_page(request):
 def contact_page(request):
     context = {'title': 'Contact',
                'content': 'Welcome to Contact'}
-    return render(request, 'contact_page.html', context)
+    if request.method == "POST":
+        print(request.POST)
+    return render(request, 'contact/view.html', context)
