@@ -1,7 +1,8 @@
 from django.http import HttpResponse
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate, login, get_user_model
 from django.shortcuts import render, redirect
 from .forms import ContactForm, LoginForm, RegisterForm
+
 
 
 def home_page(request):
@@ -10,7 +11,7 @@ def home_page(request):
                }
     if request.user.is_authenticated():
         context['premium_content'] = "Ohh Yeahhh"
-    return render(request, 'home_page.html', context)
+    return render(request, "home_page.html", context)
 
 
 def about_page(request):
@@ -47,7 +48,7 @@ def login_page(request):
         print(form.cleaned_data)
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
-        user = authenticate(request,username=username, password=password)
+        user = authenticate(request, username=username, password=password)
         print(user)
         # print(request.user.is_authenticated())
         if user is not None:
@@ -61,6 +62,9 @@ def login_page(request):
     return  render(request, "auth/login.html", context)
 
 
+User = get_user_model()
+
+
 def register_page(request):
     form = RegisterForm(request.POST or None)
     context = {
@@ -68,6 +72,11 @@ def register_page(request):
     }
     if form.is_valid():
         print(form.cleaned_data)
+        username = form.cleaned_data.get("username")
+        email = form.cleaned_data.get("email")
+        password = form.cleaned_data.get("password")
+        new_user = User.objects.create_user(username, email, password)
+        print(new_user)
     return render(request, "auth/register.html", context)
 
 
