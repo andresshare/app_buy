@@ -79,6 +79,3 @@ def register_page(request):
         print(new_user)
     return render(request, "auth/register.html", context)
 
-
-
-
